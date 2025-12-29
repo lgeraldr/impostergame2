@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Imposter Game</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: #f4f4f9; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh;}
+        h1 { font-size: 32px; margin-bottom: 20px; text-align:center;}
+        form { width: 100%; max-width: 400px; display: flex; flex-direction: column; gap: 15px;}
+        label { font-size: 18px;}
+        input, select { font-size: 18px; padding: 10px; border-radius: 8px; border: 1px solid #ccc; width: 100%;}
+        button { font-size: 20px; padding: 12px; border: none; border-radius: 8px; background-color: #007bff; color: white; cursor: pointer;}
+        button:hover { background-color: #0056b3; }
+    </style>
+</head>
+<body>
+    <h1>Imposter Game</h1>
+    <form method="POST">
+        <label for="players">Number of players:</label>
+        <input type="number" id="players" name="players" min="2" max="30" required>
+
+        <label for="difficulty">Difficulty (1-5):</label>
+        <select id="difficulty" name="difficulty" required>
+            <option value="1">1 - Easy</option>
+            <option value="2">2 - Medium</option>
+            <option value="3">3 - Hard</option>
+            <option value="4">4 - Very Hard</option>
+            <option value="5">5 - Expert</option>
+        </select>
+
+        <label for="mode">Game Mode:</label>
+        <select id="mode" name="mode" required>
+            <option value="classic">Classic</option>
+            <option value="imposter_no_word">Imposter No Word</option>
+            <option value="question">Question</option>
+        </select>
+
+        <button type="submit">Start Game</button>
+    </form>
+</body>
+</html>
+

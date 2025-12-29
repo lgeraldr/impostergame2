@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Player Turn</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:100vh; background: #f0f0ff;}
+        h2 { font-size: 28px; margin-bottom:20px; }
+        p { font-size:22px; margin:20px 0; text-align:center;}
+        button { font-size:20px; padding:12px 24px; border:none; border-radius:8px; background-color:#28a745; color:white; cursor:pointer;}
+        button:hover { background-color:#1e7e34; }
+    </style>
+</head>
+<body>
+    <h2>Player {{ player_num }}'s Turn</h2>
+
+    {% if show_word %}
+        <p>{{ message }}</p>
+        <a href="{{ url_for('next_player') }}"><button>Next Player</button></a>
+    {% else %}
+        <form method="POST">
+            <button type="submit">Reveal Your Word</button>
+        </form>
+    {% endif %}
+</body>
+</html>

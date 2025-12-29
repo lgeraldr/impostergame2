@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Game Over</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { font-family: Arial, sans-serif; display: flex; flex-direction: column;
+               align-items: center; justify-content: center; min-height: 100vh;
+               background-color: #f0f0f0; padding: 20px; text-align: center; }
+        h1 { font-size: 28px; margin-bottom: 20px; }
+        p { font-size: 22px; margin: 10px 0; }
+    </style>
+</head>
+<body>
+   <h1>Game Finished!</h1>
+    <p>Secret Word / Question: {{ game.secret_word }}</p>
+    <p>Imposters: {{ game.imposters | join(", ") }}</p>
+    <a href="{{ url_for('index') }}"><button>Play Again</button></a>
+</body>
+</html>
+
