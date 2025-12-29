@@ -1,8 +1,9 @@
 from flask import Flask, render_template, request, session, redirect, url_for
 from game import create_game
+import random
 
 app = Flask(__name__)
-app.secret_key = "dev-secret"  # replace with a secure key in production
+app.secret_key = "dev-secret"
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -13,7 +14,7 @@ def index():
 
         game = create_game(players, difficulty, mode)
         game["current_player"] = 0
-        game["state"] = "blank"  # either "blank" or "reveal"
+        game["state"] = "blank"
         session["game"] = game
 
         return redirect(url_for("player_turn"))
@@ -63,12 +64,26 @@ def next_player():
 
     game["current_player"] += 1
     game["state"] = "blank"
-    session["game"] = game
 
+    # After last player, pick a random final player
     if game["current_player"] >= game["players"]:
+        game["final_random_player"] = random.randint(1, game["players"])
+        game["imposters_revealed"] = False
+        session["game"] = game
         return redirect(url_for("final"))
 
+    session["game"] = game
     return redirect(url_for("player_turn"))
+
+@app.route("/reveal_imposters")
+def reveal_imposters():
+    game = session.get("game")
+    if not game:
+        return redirect(url_for("index"))
+
+    game["imposters_revealed"] = True
+    session["game"] = game
+    return redirect(url_for("final"))
 
 @app.route("/final")
 def final():
@@ -80,6 +95,10 @@ def final():
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=5000)
+
+
+
+
 
 
 
